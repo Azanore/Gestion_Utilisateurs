@@ -23,9 +23,8 @@ const ErrorPage = ({
         </div>
 
         <Link
-          to="/login"
+          to="/"
           className="btn btn-danger btn-lg px-5 rounded-pill shadow-sm hover-shadow-lg"
-          
         >
           Return to Login Page
         </Link>

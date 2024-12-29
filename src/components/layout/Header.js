@@ -15,7 +15,7 @@ function Header() {
         <img
           src="\logo.svg"
           alt="logo"
-          className="img-fluid rounded"
+          className="img-fluid rounded ms-2"
           style={{ width: "48px" }}
         />
         <h1 className={`ms-3 mb-0 text-${userData.couleur}`}>MonCoin</h1>
@@ -29,17 +29,18 @@ function Header() {
             </strong>
           </span>
           <img
-            src={userData.photo} // Assuming the avatar is stored in userData
+            src={userData.photo}
             alt="User Avatar"
             className={`rounded-circle border border-1 border-${userData.couleur}`}
             style={{ width: "40px", height: "40px" }}
           />
           <button
             onClick={handleClick}
-            className={`btn btn-outline-${userData.couleur} ms-5 rounded-0`}
-            style={{borderStyle: "dashed"}}
+            className={`btn btn-outline-${userData.couleur} ms-5 me-2 rounded-0`}
+            style={{ borderStyle: "dashed" }}
           >
             Se déconnecter
+            <i className="bi bi-box-arrow-right ms-2"></i>
           </button>
         </div>
       )}

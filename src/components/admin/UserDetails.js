@@ -24,8 +24,11 @@ function UserDetails({ userId }) {
 
   return (
     <div className=" pe-3 pt-5">
-      <h2 className="mb-4 text-center">Détails</h2>
-      <div className="mb-3 d-flex justify-content-center align-items-center " style={{ height: "150px" }}>
+      <h2 className="mb-4 text-center">Profil utilisateur</h2>
+      <div
+        className="mb-3 d-flex justify-content-center align-items-center "
+        style={{ height: "150px" }}
+      >
         <img
           src={userDetails.photo}
           alt="Profil"

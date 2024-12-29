@@ -13,9 +13,7 @@ function RequestUserShow() {
 
   return (
     <div className="px-3 pt-5">
-      <h2 className="mb-4">
-        Ceci est la page d'affichage des demandes pour utilisateur
-      </h2>
+      <h2 className="mb-4">Mes demandes </h2>
       <table className="table table-striped table-borderless border-bottom table-hover caption-top">
         <thead className="table-dark">
           <tr>
@@ -27,33 +25,41 @@ function RequestUserShow() {
           </tr>
         </thead>
         <tbody>
-          {demandes.map((demande) => (
-            <tr key={demande.id}>
-              <td>{demande.titre}</td>
-              <td>{demande.description}</td>
-              <td
-                className={
-                  demande.status === "en_attente"
-                    ? "text-warning"
-                    : demande.status === "approuvé"
-                    ? "text-success"
-                    : demande.status === "rejeté"
-                    ? "text-danger"
-                    : ""
-                }
-              >
-                {demande.status}
-              </td>
-              <td>{demande.date}</td>
-              <td>
-                <RequestUserDelete
-                  demandeId={demande.id}
-                  status={demande.status}
-                  onDelete={handleDelete}
-                />
+          {demandes.length === 0 ? (
+            <tr>
+              <td colSpan={5} className="text-center">
+                Aucune demande à afficher
               </td>
             </tr>
-          ))}
+          ) : (
+            demandes.map((demande) => (
+              <tr key={demande.id}>
+                <td>{demande.titre}</td>
+                <td>{demande.description}</td>
+                <td
+                  className={
+                    demande.status === "en_attente"
+                      ? "text-warning"
+                      : demande.status === "approuvé"
+                      ? "text-success"
+                      : demande.status === "rejeté"
+                      ? "text-danger"
+                      : ""
+                  }
+                >
+                  {demande.status}
+                </td>
+                <td>{demande.date}</td>
+                <td>
+                  <RequestUserDelete
+                    demandeId={demande.id}
+                    status={demande.status}
+                    onDelete={handleDelete}
+                  />
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>

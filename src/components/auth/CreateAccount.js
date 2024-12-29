@@ -153,7 +153,7 @@ function Formulaire() {
         // Si le pseudo est unique, soumettre le formulaire
         axios
           .post("https://675afd529ce247eb19354af3.mockapi.io/users", formData)
-          .then(() => navigate("/login"))
+          .then(() => navigate("/"))
           .catch(() => {
             setErrors((prev) => ({
               ...prev,
@@ -178,7 +178,15 @@ function Formulaire() {
         onSubmit={handleSubmit}
         className="col-md-5 mx-auto shadow-lg p-4 pt-5 my-4 rounded-3 d-flex flex-column gap-3"
       >
-        <h2 className="text-center mb-4">Créer un compte</h2>
+        <div className="text-center mb-4">
+          <img
+            src="/logo.svg"
+            alt="Logo"
+            className="mb-3 rounded shadow"
+            style={{ width: "120px", height: "auto" }}
+          />
+          <h2 className="text-center mb-4">Créer un compte</h2>
+        </div>{" "}
         <div>
           <input
             onInput={handleIdentifiants}
@@ -202,6 +210,7 @@ function Formulaire() {
             onInput={handleIdentifiants}
             name="age"
             placeholder="Âge"
+            type="number"
             value={formData.age}
             className="form-control"
           />
@@ -303,7 +312,7 @@ function Formulaire() {
           </select>
         </div>
         <button type="submit" className="btn btn-primary">
-          Soumettre
+          S'inscrire
         </button>
         {errors.general && (
           <div className="alert mb-0 alert-danger" role="alert">
@@ -311,7 +320,7 @@ function Formulaire() {
           </div>
         )}
         <div className="text-center">
-          Vous avez déjà un compte ? <Link to="/login">Se connecter</Link>
+          Vous avez déjà un compte ? <Link to="/">Se connecter</Link>
         </div>
       </form>
     </div>

@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 function Aside() {
   const [isOpen, setIsOpen] = useState(true);
   const userData = useSelector((state) => state.auth.userData);
+  const isAdmin = userData.admin;
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -35,7 +36,7 @@ function Aside() {
             to="profile"
             className={`btn btn-dark text-${userData.couleur} btn-sm rounded-0 rounded-end-2 w-100 fw-bold`}
           >
-            Profil
+            Mon profil
           </Link>
         </li>
         <li>
@@ -43,7 +44,7 @@ function Aside() {
             to="appearance"
             className={`btn btn-dark text-${userData.couleur} btn-sm rounded-0 rounded-end-2 w-100 fw-bold`}
           >
-            Modifier couleur
+            Personnaliser l'apparence
           </Link>
         </li>
         <li>
@@ -51,49 +52,59 @@ function Aside() {
             to="password"
             className={`btn btn-dark text-${userData.couleur} btn-sm rounded-0 rounded-end-2 w-100 fw-bold`}
           >
-            Modifier mot de passe
+            Changer mon mot de passe
           </Link>
         </li>
-        <li>
-          <Link
-            to="users"
-            className={`btn btn-dark text-${userData.couleur} btn-sm rounded-0 rounded-end-2 w-100 fw-bold`}
-          >
-            Liste utilisateurs
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="users/new"
-            className={`btn btn-dark text-${userData.couleur} btn-sm rounded-0 rounded-end-2 w-100 fw-bold`}
-          >
-            Ajouter utilisateur
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="requests/new"
-            className={`btn btn-dark text-${userData.couleur} btn-sm rounded-0 rounded-end-2 w-100 fw-bold`}
-          >
-            Ajouter une demande
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="requests/user"
-            className={`btn btn-dark text-${userData.couleur} btn-sm rounded-0 rounded-end-2 w-100 fw-bold`}
-          >
-            Afficher les demandes
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="requests/admin"
-            className={`btn btn-dark text-${userData.couleur} btn-sm rounded-0 rounded-end-2 w-100 fw-bold`}
-          >
-            Gestion des demandes
-          </Link>
-        </li>
+        {isAdmin && (
+          <li>
+            <Link
+              to="users"
+              className={`btn btn-dark text-${userData.couleur} btn-sm rounded-0 rounded-end-2 w-100 fw-bold`}
+            >
+              Gestion des utilisateurs
+            </Link>
+          </li>
+        )}
+        {isAdmin && (
+          <li>
+            <Link
+              to="users/new"
+              className={`btn btn-dark text-${userData.couleur} btn-sm rounded-0 rounded-end-2 w-100 fw-bold`}
+            >
+              Ajouter un utilisateur
+            </Link>
+          </li>
+        )}
+        {!isAdmin && (
+          <li>
+            <Link
+              to="requests/new"
+              className={`btn btn-dark text-${userData.couleur} btn-sm rounded-0 rounded-end-2 w-100 fw-bold`}
+            >
+              Soumettre une demande
+            </Link>
+          </li>
+        )}
+        {!isAdmin && (
+          <li>
+            <Link
+              to="requests/user"
+              className={`btn btn-dark text-${userData.couleur} btn-sm rounded-0 rounded-end-2 w-100 fw-bold`}
+            >
+              Mes demandes
+            </Link>
+          </li>
+        )}
+        {isAdmin && (
+          <li>
+            <Link
+              to="requests/admin"
+              className={`btn btn-dark text-${userData.couleur} btn-sm rounded-0 rounded-end-2 w-100 fw-bold`}
+            >
+              Gestion des demandes
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

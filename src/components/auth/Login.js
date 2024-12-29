@@ -15,15 +15,20 @@ function Login() {
   }, [isAuthenticated, navigate]);
 
   const [identifiants, setIdentifiants] = useState({
-    pseudo: "", // Change 'nom' to 'pseudo'
+    pseudo: "",
     MotDePasse: "",
   });
   const [tentativesAuth, setTentativesAuth] = useState(0);
   const [erreurs, setErreurs] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State pour afficher/masquer le mot de passe
 
   const handleIdentifiants = (ev) => {
-    setIdentifiants({ ...identifiants, [ev.target.name]: ev.target.value });
-    setErreurs("");
+    const { name, value } = ev.target;
+    setIdentifiants((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+    setErreurs(""); // Reset errors when input changes
   };
 
   const handleSubmit = (ev) => {
@@ -39,7 +44,7 @@ function Login() {
       return;
     }
 
-    dispatch(loginUser(identifiants)) // Utiliser le pseudo ici
+    dispatch(loginUser(identifiants))
       .then(() => {
         setTentativesAuth(0);
         setErreurs("");
@@ -71,21 +76,28 @@ function Login() {
         <div className="mb-3">
           <input
             onInput={handleIdentifiants}
-            name="pseudo" // Change 'nom' to 'pseudo'
+            name="pseudo"
             placeholder="Pseudo"
-            value={identifiants.pseudo} // Bind to pseudo instead of nom
+            value={identifiants.pseudo}
             className="form-control"
           />
         </div>
-        <div className="mb-3">
+        <div className="mb-3 position-relative">
           <input
             onInput={handleIdentifiants}
             name="MotDePasse"
             placeholder="Mot de passe"
-            type="password"
+            type={showPassword ? "text" : "password"} // Toggle le type de l'input
             value={identifiants.MotDePasse}
             className="form-control"
           />
+          <button
+            type="button"
+            className="position-absolute top-50 end-0 translate-middle-y btn btn-link text-dark"
+            onClick={() => setShowPassword(!showPassword)} // Toggle l'affichage du mot de passe
+          >
+            <i className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`}></i>
+          </button>
         </div>
         <div className="mb-3">
           <button

@@ -169,7 +169,7 @@ function Formulaire() {
         onSubmit={handleSubmit}
         className="d-flex pb-3 flex-column gap-3 col-8"
       >
-        <h2 className="mb-4">Ajouter un utilisateur</h2>
+        <h2 className="mb-4">Ajouter un nouveau compte</h2>
         <div className="row">
           <div className="col-6">
             <input
@@ -195,6 +195,7 @@ function Formulaire() {
             <input
               onInput={handleIdentifiants}
               name="age"
+              type="number"
               placeholder="Âge"
               value={formData.age}
               className="form-control"

@@ -68,7 +68,7 @@ function ModifyPassword() {
     dispatch(changePassword(userData.id, passwords.newPassword))
       .then(() => {
         // Navigate after the password change and logout are complete
-        navigate("/login");
+        navigate("/");
       })
       .catch((error) => {
         // Handle any errors during the password change process
@@ -79,7 +79,7 @@ function ModifyPassword() {
   return (
     <div className="px-3 pt-5">
       <form onSubmit={handleSubmit} className="d-flex flex-column gap-3 col-4">
-        <h2 className="mb-4">Modification du mot de passe</h2>
+        <h2 className="mb-4">Changer votre mot de passe</h2>
         <div>
           <input
             onInput={handleChange}

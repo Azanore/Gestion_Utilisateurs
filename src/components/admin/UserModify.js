@@ -92,12 +92,12 @@ function UserModify({ userId, fetchData, setSelectedUserId }) {
   };
 
   if (!formData || loading) {
-    return <p>Chargement des données...</p>;
+    return null;
   }
 
   return (
     <div className="pt-5">
-      <h2 className="mb-4 text-center">Mise à jour</h2>
+      <h2 className="mb-4 text-center">Éditer l'utilisateur</h2>
       <form onSubmit={handleSubmit} className="d-flex flex-column gap-3 pe-3">
         <div>
           <label htmlFor="nom" className="form-label">
@@ -135,6 +135,7 @@ function UserModify({ userId, fetchData, setSelectedUserId }) {
             onInput={handleIdentifiants}
             name="age"
             id="age"
+            type="number"
             placeholder="Âge"
             value={formData.age || ""}
           />

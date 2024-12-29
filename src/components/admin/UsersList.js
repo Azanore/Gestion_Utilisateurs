@@ -8,7 +8,6 @@ function UsersList() {
   const [allUsersData, setAllUsersData] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null); // Id de l'utilisateur sélectionné
   const [activeSection, setActiveSection] = useState(null); // Section active: "modify" ou "details"
-
   const fetchData = () => {
     axios
       .get("https://675afd529ce247eb19354af3.mockapi.io/users")
@@ -34,14 +33,13 @@ function UsersList() {
     }
   };
 
-  
   return (
     <>
       <div className="d-flex align-items-start">
         <div className=" pt-5 px-3 col-9 ">
           <table className="table table-striped table-borderless caption-top table-hover mb-0 border-bottom">
             <caption className=" h2 p-0 mb-4">
-              Ceci est la liste des utilisateurs
+              Liste complète des utilisateurs
             </caption>
             <thead className="table-dark">
               <tr>
@@ -54,17 +52,25 @@ function UsersList() {
               </tr>
             </thead>
             <tbody>
-              {allUsersData.map((user) => (
-                <UserList
-                  key={user.id}
-                  userData={user}
-                  fetchData={fetchData}
-                  onModifyClick={() => handleActionClick(user.id, "modify")} // Bouton Modifier
-                  onDetailsClick={() => handleActionClick(user.id, "details")} // Bouton Détails
-                  setSelectedUserId={setSelectedUserId}
-                  setActiveSection={setActiveSection}
-                />
-              ))}
+              {allUsersData.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="text-center">
+                    Aucun utilisateur enregistré
+                  </td>
+                </tr>
+              ) : (
+                allUsersData.map((user) => (
+                  <UserList
+                    key={user.id}
+                    userData={user}
+                    fetchData={fetchData}
+                    onModifyClick={() => handleActionClick(user.id, "modify")} // Bouton Modifier
+                    onDetailsClick={() => handleActionClick(user.id, "details")} // Bouton Détails
+                    setSelectedUserId={setSelectedUserId}
+                    setActiveSection={setActiveSection}
+                  />
+                ))
+              )}
             </tbody>
           </table>
         </div>

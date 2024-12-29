@@ -14,25 +14,23 @@ import ModifyPassword from "./components/user/ModifyPassword";
 import ErrorPage from "./components/errors/Error";
 import { useSelector } from "react-redux";
 
-
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = useSelector((state) => Boolean(state.auth.userData));
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
-
   return children;
 };
 
 function App() {
+  const isAdmin = useSelector((state) => state.auth.userData.admin);
   return (
     <BrowserRouter>
       <Routes>
         {/* Auth routes */}
-        <Route path="/login" index element={<Login />} />
+        <Route path="/" index element={<Login />} />
         <Route path="/register" element={<Formulaire />} />
-
         {/* Dashboard routes */}
         <Route
           path="/dashboard"
@@ -48,16 +46,22 @@ function App() {
           <Route path="password" element={<ModifyPassword />} />
 
           {/* Admin routes */}
-          <Route path="users">
-            <Route index element={<UsersList />} />
-            <Route path="new" element={<AddUser />} />
-          </Route>
+          {isAdmin && (
+            <Route path="users">
+              <Route index element={<UsersList />} />
+              <Route path="new" element={<AddUser />} />
+            </Route>
+          )}
 
           {/* Request routes */}
           <Route path="requests">
-            <Route path="new" element={<RequestUserAdd />} />
-            <Route path="user" element={<RequestUserShow />} />
-            <Route path="admin" element={<RequestAdminShow />} />
+            {!isAdmin && (
+              <>
+                <Route path="new" element={<RequestUserAdd />} />
+                <Route path="user" element={<RequestUserShow />} />
+              </>
+            )}
+            {isAdmin && <Route path="admin" element={<RequestAdminShow />} />}
           </Route>
         </Route>
 

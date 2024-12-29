@@ -24,7 +24,6 @@ function RequestAdminShow() {
   const handleSelectChange = (ev, id, id_user) => {
     const userRequests = demandes.filter((demande) => {
       return demande.id_user === id_user;
-      // je pense que je dois modifier directement le tableau au lieu de filter
     });
     const newDemandes = userRequests.map((requete) => {
       if (requete.id === id) {
@@ -56,7 +55,7 @@ function RequestAdminShow() {
     <div className="flex-grow-1 pt-5 px-3">
       <table className="table table-striped table-borderless caption-top table-hover border-bottom mb-0">
         <caption className="h2 p-0 mb-4">
-          Ceci est la page d'affichage des demandes pour l'administrateur
+          Tableau de bord des demandes (Admin)
         </caption>
         <thead className="table-dark">
           <tr>
@@ -74,7 +73,7 @@ function RequestAdminShow() {
           {/* Vérifie si le tableau des demandes est vide */}
           {demandes.length === 0 ? (
             <tr>
-              <td colSpan={6} className="text-center">
+              <td colSpan={7} className="text-center">
                 Aucune demande à afficher
               </td>
             </tr>

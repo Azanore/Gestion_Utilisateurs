@@ -46,7 +46,7 @@ const handleSubmit = (ev) => {
       <div className=" justify-content-center">
         <div>
           <form onSubmit={handleSubmit}>
-            <h2 className=" mb-4">Modification de la couleur</h2>
+            <h2 className=" mb-4">Changer la couleur de l'interface</h2>
             <div className="mb-5">
               {colorPairs.map((pair, index) => (
                 <div key={index} className="row g-4 mb-4">
